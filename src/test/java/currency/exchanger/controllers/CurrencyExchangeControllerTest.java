@@ -1,35 +1,44 @@
 package currency.exchanger.controllers;
 
+import currency.exchanger.dto.ClientRequestDto;
 import currency.exchanger.services.CurrencyExchangeService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.testng.annotations.DataProvider;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import java.math.BigDecimal;
+
+import static org.mockito.Mockito.verify;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class CurrencyExchangeControllerTest {
 
+    @InjectMocks
     private CurrencyExchangeController currencyExchangeController;
 
     @Mock
     private CurrencyExchangeService currencyExchangeService;
 
-    @BeforeEach
+    @BeforeMethod
     public void before() {
         currencyExchangeController = new CurrencyExchangeController();
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void ada() {
+    public void getExchangedCurrency_ResponseStatusOk_IfRequestIsValid() {
+        // Given
+        ClientRequestDto clientRequestDto = new ClientRequestDto(BigDecimal.ONE, "USD", "EUR");
 
-    }
+        // When
+        ResponseEntity<StringBuilder> exchangedCurrency = currencyExchangeController.getExchangedCurrency(clientRequestDto);
 
-
-    @DataProvider
-    public Object[][] test() {
-        return new Object[][] {
-                new Object[] {"G", "asd"
-        }};
+        // Then
+        verify(currencyExchangeService).calculateExchangedCurrencyAmount(clientRequestDto);
+        assertEquals("Received unexpected HttpStatus", exchangedCurrency.getStatusCode(), HttpStatus.OK);
     }
 }

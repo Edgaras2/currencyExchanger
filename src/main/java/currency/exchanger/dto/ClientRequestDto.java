@@ -1,20 +1,29 @@
 package currency.exchanger.dto;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
 
 public class ClientRequestDto {
 
-    private Double amount;
+    public ClientRequestDto(BigDecimal amount, String currentCurrency, String targetCurrency) {
+        this.amount = amount;
+        this.currentCurrency = currentCurrency;
+        this.targetCurrency = targetCurrency;
+    }
+
+    @DecimalMin(value = "0.0", inclusive = false, message = "Negative amount is not accepted")
+    private BigDecimal amount;
     @NotEmpty(message = "Current currency can not be empty")
     private String currentCurrency;
     @NotEmpty(message = "Target currency can not be empty")
     private String targetCurrency;
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
