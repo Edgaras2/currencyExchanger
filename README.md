@@ -1,6 +1,6 @@
 # Currency Exchanger
 Exchanges currency between different currency pairs.
-Available Currency to be converted:
+Available Currency to be exchanged:
   EUR
   GBP
   USD
