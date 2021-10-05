@@ -1,4 +1,5 @@
-Exchanges currency between different pairs.
+# Currency Exchanger
+Exchanges currency between different currency pairs.
 Available Currency to be converted:
   EUR
   GBP
