@@ -13,4 +13,4 @@ Rest Api enpoint -> 'currencyExchange' e.g. localhost:8080/currencyExchange
 Call Api as POST and provide json body with amount, currentCurrency, targetCurrency
 
 e.g.
-![image](https://user-images.githubusercontent.com/36513869/136012428-7ac4bc8d-4926-4031-9ad2-68837329e183.png)
+![image](https://user-images.githubusercontent.com/36513869/136012499-72a9fd5f-8948-4a9f-bb1f-131ccb732289.png)
